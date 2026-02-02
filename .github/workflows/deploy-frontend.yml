@@ -3,18 +3,16 @@ name: Deploy React App to S3
 on:
   push:
     branches: ["main"]   # change if your default branch is different
- 
   workflow_dispatch:
-     inputs:
-         cache_control:
-         description: "Cache-Control header for S3 objects"
-         required: false
-         default: "max-age=60"
+    inputs:
+      cache_control:
+        description: "Cache-Control header for S3 objects"
+        required: false
+        default: "max-age=60"
       dry_run:
         description: "Show what would be uploaded/deleted without making changes"
         required: false
         default: "false"
-
 
 jobs:
   deploy:
@@ -45,9 +43,8 @@ jobs:
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          # --delete removes files no longer present locally
-          # --cache-control keeps cache short so updates show quickly
-          args: --delete --cache-control max-age=60
+          # Use the manual input for cache control; fall back to a default if empty
+          args: --delete --cache-control ${{ github.event.inputs.cache_control || 'max-age=60' }}
         env:
           AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
