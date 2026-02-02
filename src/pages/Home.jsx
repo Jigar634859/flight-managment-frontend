@@ -7,7 +7,7 @@ import BookingModal from '../components/BookingModal';
 import { fmtCurrency, fmtDateTime } from '../utils/formatters';
 
 export default function Home() {
-  const { isUserAuthenticated } = useAuth();
+  const { isUserAuthenticated, isAdminAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [flights, setFlights] = useState([]);
   const [selectedFlight, setSelectedFlight] = useState(null);
@@ -110,7 +110,7 @@ export default function Home() {
                     <i className="bi bi-ticket-perforated me-2"></i>
                     Book Now
                   </Button>
-                ) : (
+                ) : !isAdminAuthenticated && (
                   <Button
                     variant="outline-light"
                     size="lg"
