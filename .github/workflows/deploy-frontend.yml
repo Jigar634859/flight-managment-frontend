@@ -24,7 +24,7 @@ jobs:
       - name: Build the app
         env:
           CI: false
-          REACT_APP_USE_MOCK: ${{ secrets.REACT_APP_USE_MOCK }}
+         
           REACT_APP_API_BASE: ${{ secrets.REACT_APP_API_BASE }}
         run: npm run build
 
