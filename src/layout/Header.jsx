@@ -87,10 +87,6 @@ export default function Header() {
                 <NavDropdown.Item as={NavLink} to="/admin">
                   <i className="bi bi-speedometer2 me-2"></i>Dashboard
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => handleLogout('admin')}>
-                  <i className="bi bi-box-arrow-right me-2"></i>Logout
-                </NavDropdown.Item>
               </NavDropdown>
             ) : !isUserAuthenticated && (
               <Nav.Link as={NavLink} to="/admin/login" className="ms-2">
